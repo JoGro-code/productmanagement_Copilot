@@ -1,7 +1,9 @@
 import openai
+from helpers.config import OPENAI_ORGANIZATION, OPENAI_API_KEY
 
-openai.organization = "org-21h5UhX8KODhLjTZGGmYmuH5" 
-openai.api_key = "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"
+openai.organization = OPENAI_ORGANIZATION
+openai.api_key = OPENAI_API_KEY
+
 
 def filter_completions(completions, product_text):
     filtered_completions = []
