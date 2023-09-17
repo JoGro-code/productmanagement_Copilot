@@ -1,5 +1,5 @@
 import openai
-from helpers.config import OPENAI_ORGANIZATION, OPENAI_API_KEY
+from config import OPENAI_ORGANIZATION, OPENAI_API_KEY
 
 openai.organization = OPENAI_ORGANIZATION
 openai.api_key = OPENAI_API_KEY
@@ -34,9 +34,9 @@ def pass_to_chatgpt(website_content=None, company_name=None, product_name=None, 
         return "Fehler beim Kommunizieren mit der ChatGPT-API."
 
     questions = [
-        (f"Woran liegt es dass das Produkt nicht konvertiert? Hier ist die aktuelle Beschreibung: {product_name} {product_text}", 0.3),
-        (f"Bewerte die oben genannte aktuelle Beschreibung für {product_name} mit einem Score von 0 für schlecht und 100 perfekt im Bezug auf Online Marketing. Gebe zwingend einen Wert zurück.Hier ist die aktuelle Beschreibung: {product_name} {product_text}", 0.1),  
-        (f"Was sind die Zielgruppen von {company_name} für das Produkt? Mache konkrete Vorschläge.", 0.5),  
+        (f"Du bist Online Marketing Spezialist. Woran liegt es dass das Produkt nicht konvertiert? Hier ist die aktuelle Beschreibung: {product_name} {product_text}", 0.3),
+        (f"Bewerte die oben genannte aktuelle Beschreibung für {product_name} mit einem Score von 0 für schlecht und 100 perfekt im Bezug auf Online Marketing. Gebe zwingend einen ZahlenWert zurück.Hier ist die aktuelle Beschreibung: {product_name} {product_text}", 0.1),  
+        (f"Was sind die Zielgruppen von {company_name} für das Produkt? Mache konkrete Vorschläge.", 0.5), 
         (f"Optimiere für diese Zielgruppe die Produktbeschreibung für {product_name} zu den vorgeschlagenen Verbesserungen.", 0.8),  
         (f"Was wäre eine konkrete anzunehmende Preisspanne pro {product_name}, basierend auf den Dir zur Verfügung stehenden Daten im B2B Bereich und netto? Die Antwort muss eine Zahl enthalten. Mache einen direkten Vorschlag.", 0.2),  
         (f"Mache je von dir oben identifizierter Zielgruppe einen konkreten Preisvorschlag pro {product_name}. Die Antwort muss mindestens eine Zahl enthalten.", 0.3),  

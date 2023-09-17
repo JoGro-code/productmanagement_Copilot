@@ -6,6 +6,17 @@ cd path_to_project
 
 source venv/bin/activate # This is for Unix systems. Use 'venv\Scripts\activate' for Windows.
 
+# If you do not have a virtual environment yet follow along
+
+    cd path_to_project
+    pip install virtualenv
+    virtualenv venv
+    venv\Scripts\activate for Windows.
+    source venv/bin/activate for Unix systems
+    pip install -r requirements.txt
+    Deactivate the virtual environment:
+        When you are finished and want to exit the virtual environment, simply type deactivate.
+
 # Install the required packages
 
 pip install -r requirements.txt # Assuming you have a requirements.txt file with the necessary packages.
