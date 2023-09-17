@@ -1,5 +1,5 @@
 import openai
-from config import OPENAI_ORGANIZATION, OPENAI_API_KEY
+from helpers.config import OPENAI_ORGANIZATION, OPENAI_API_KEY
 
 openai.organization = OPENAI_ORGANIZATION
 openai.api_key = OPENAI_API_KEY
