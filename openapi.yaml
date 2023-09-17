@@ -1,0 +1,111 @@
+openapi: 3.0.1
+info:
+  title: ChatGPT Analysis Plugin
+  description:
+    A plugin for analyzing websites using ChatGPT and SQLite for data storage.
+    If you do not know the user's username, ask them first before making queries to the plugin.
+    Otherwise, use the username "global".
+  version: "v1"
+servers:
+  - url: http://localhost:8000
+
+paths:
+  /analyze/{username}:
+    post:
+      operationId: analyzeWebsite
+      summary: Analyze a website and retrieve marketing insights
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+          description: The name of the user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalysisRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalysisResponse"
+  /get_user_requests/{username}:
+    get:
+      operationId: getUserRequests
+      summary: Get the list of user requests from SQLite database
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+          description: The name of the user.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetUserRequestsResponse"
+
+components:
+  schemas:
+    AnalysisRequest:
+      type: object
+      required:
+        - website_url
+        - company_name
+        - product_name
+        - product_text
+      properties:
+        website_url:
+          type: string
+          description: The URL of the website to analyze.
+        company_name:
+          type: string
+          description: The name of the company.
+        product_name:
+          type: string
+          description: The name of the product.
+        product_text:
+          type: string
+          description: The description of the product.
+    AnalysisResponse:
+      type: object
+      properties:
+        completions:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: Type of the completion (Question or Answer).
+              content:
+                type: string
+                description: Content of the completion.
+    GetUserRequestsResponse:
+      type: object
+      properties:
+        requests:
+          type: array
+          items:
+            type: object
+            properties:
+              website_url:
+                type: string
+                description: The URL of the website.
+              company_name:
+                type: string
+                description: The name of the company.
+              product_name:
+                type: string
+                description: The name of the product.
+              product_text:
+                type: string
+                description: The description of the product.
