@@ -5,6 +5,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import sqlite3
 from helpers.chatgpt_utils import pass_to_chatgpt
+from helpers.get_website_utils import get_website_content
 
 import threading
 
@@ -30,7 +31,7 @@ class AnalysisRequest(BaseModel):
 async def analyze_website(username: str, request: AnalysisRequest):
     # Calling the pass_to_chatgpt function from chatgpt_utils
     analysis_result = pass_to_chatgpt(
-        website_content=request.website_url,
+        website_content=get_website_content(request.website_url),
         company_name=request.company_name,
         product_name=request.product_name,
         product_text=request.product_text
