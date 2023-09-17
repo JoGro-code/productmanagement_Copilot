@@ -27,7 +27,7 @@ class AnalysisRequest(BaseModel):
     product_text: str
 
 @app.post("/analyze/{username}")
-def analyze_website(username: str, request: AnalysisRequest):
+async def analyze_website(username: str, request: AnalysisRequest):
     # Calling the pass_to_chatgpt function from chatgpt_utils
     analysis_result = pass_to_chatgpt(
         website_content=request.website_url,
@@ -48,7 +48,7 @@ def analyze_website(username: str, request: AnalysisRequest):
     return analysis_result
 
 @app.get("/get_user_requests/{username}")
-def get_user_requests(username: str):
+async def get_user_requests(username: str):
     with sqlite3.connect(db_name) as conn:
         cursor = conn.cursor()
         cursor.execute("SELECT website_url, company_name, product_name, product_text FROM user_data WHERE username=?", (username,))
