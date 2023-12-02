@@ -20,7 +20,7 @@ def get_website_content(website_url=None):
         text_content = soup.get_text(separator=" ")
         # Entferne überflüssige Zeilenumbrüche, Platzhalter usw.
         text_content = " ".join(text_content.split())
-        print("text", text_content)
+        #print("text", text_content)
         return text_content
     
     except requests.exceptions.RequestException as e:
